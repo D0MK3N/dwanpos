@@ -1,0 +1,52 @@
+BAB 1
+DETEKSI DAN PENCEGAHAN SERANGAN CROSS-SITE SCRIPTING (XSS) PADA APLIKASI POS BERBASIS NEXT.JS DAN GO
+
+1.1 Latar Belakang
+
+
+Perkembangan aplikasi web modern telah membawa kemudahan, efisiensi, dan fleksibilitas dalam berbagai bidang, termasuk sistem Point of Sale (POS) berbasis Software as a Service (SaaS). Dengan memanfaatkan teknologi web, pelaku usaha dapat mengelola transaksi, inventaris, dan laporan keuangan secara real-time dan terintegrasi. Namun, di balik kemudahan tersebut, terdapat ancaman keamanan yang tidak bisa diabaikan, salah satunya adalah serangan Cross-Site Scripting (XSS).
+
+XSS merupakan salah satu serangan siber yang paling sering terjadi pada aplikasi web. Serangan ini memungkinkan penyerang untuk menyisipkan skrip berbahaya ke dalam aplikasi, yang kemudian dijalankan di browser pengguna. Dampak dari serangan XSS sangat beragam, mulai dari pencurian data sensitif, pengambilalihan sesi pengguna, hingga manipulasi tampilan dan fungsi aplikasi. Hal ini tentu sangat berbahaya, terutama pada aplikasi POS yang menangani data transaksi dan informasi pelanggan.
+
+Aplikasi POS yang dibangun dengan Next.js di sisi frontend dan Go di sisi backend memiliki tantangan tersendiri dalam hal keamanan, khususnya dalam memvalidasi dan memfilter input pengguna. Jika tidak ditangani dengan baik, celah XSS dapat dimanfaatkan untuk menyerang pengguna, mencuri data, dan merusak reputasi bisnis. Selain itu, banyak pengembang yang masih kurang memahami pentingnya pencegahan XSS dan teknik-teknik yang dapat diterapkan secara efektif.
+
+Oleh karena itu, deteksi dan pencegahan XSS menjadi aspek krusial dalam pengembangan aplikasi POS berbasis web. Penelitian ini akan membahas secara mendalam teknik-teknik deteksi dan pencegahan XSS yang dapat diterapkan pada aplikasi POS berbasis Next.js dan Go, serta menguji efektivitasnya dalam mencegah serangan dan melindungi data pengguna.
+
+1.2 Rumusan Masalah
+
+
+Rumusan masalah dalam penelitian ini adalah sebagai berikut:
+1. Bagaimana cara mendeteksi potensi serangan XSS pada aplikasi POS berbasis Next.js dan Go?
+2. Teknik pencegahan XSS apa saja yang paling efektif dan sesuai untuk diterapkan pada arsitektur aplikasi ini?
+3. Bagaimana cara mengukur keberhasilan dan efektivitas pencegahan XSS pada aplikasi POS yang dikembangkan?
+
+1.3 Tujuan Penelitian
+
+
+Adapun tujuan dari penelitian ini adalah:
+1. Mengidentifikasi secara detail titik-titik rawan XSS pada aplikasi POS berbasis Next.js dan Go, serta menganalisis potensi dampak serangan tersebut.
+2. Mengimplementasikan berbagai teknik pencegahan XSS, seperti validasi dan sanitasi input, output encoding, serta penerapan Content Security Policy (CSP) yang sesuai dengan kebutuhan aplikasi.
+3. Melakukan pengujian dan evaluasi terhadap efektivitas teknik pencegahan XSS yang diterapkan, baik melalui simulasi serangan maupun pengujian penetrasi, sehingga aplikasi dapat dipastikan aman dari celah XSS dan dapat memberikan perlindungan maksimal bagi pengguna.
+
+1.4 Manfaat Penelitian
+
+1. Memberikan panduan praktis dalam mendeteksi dan mencegah XSS pada aplikasi web modern.
+2. Meningkatkan keamanan dan kepercayaan pengguna terhadap aplikasi POS berbasis SaaS.
+3. Menjadi referensi bagi pengembang aplikasi dalam mengimplementasikan keamanan aplikasi web.
+
+1.5 Sistematika Penulisan
+
+Bab 1: Pendahuluan
+Bab ini membahas latar belakang, rumusan masalah, tujuan, manfaat, dan sistematika penulisan.
+
+Bab 2: Tinjauan Pustaka
+Bab ini membahas teori-teori terkait XSS, keamanan aplikasi web, Next.js, dan Go.
+
+Bab 3: Metodologi Penelitian
+Bab ini menjelaskan metode yang digunakan dalam penelitian, mulai dari identifikasi celah XSS hingga implementasi dan pengujian pencegahan.
+
+Bab 4: Hasil dan Pembahasan
+Bab ini memaparkan hasil deteksi, implementasi, dan pengujian pencegahan XSS pada aplikasi POS.
+
+Bab 5: Kesimpulan dan Saran
+Bab ini berisi kesimpulan dari penelitian dan saran untuk pengembangan lebih lanjut.

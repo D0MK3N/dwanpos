@@ -1,0 +1,221 @@
+package main
+
+import (
+	"context"
+	"log"
+	"net/http"
+	"os"
+	"os/signal"
+	"syscall"
+	"time"
+
+	"saas2/backend/database"
+	"saas2/backend/middleware"
+	"saas2/backend/routes"
+	"saas2/backend/handlers"
+
+	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
+)
+
+func main() {
+	// Initialize database
+	if err := database.InitDB(); err != nil {
+		log.Fatal("Failed to connect to database: ", err)
+	}
+
+	// Auto migrate database tables
+	if err := database.MigrateDB(); err != nil {
+		log.Fatal("Failed to migrate database: ", err)
+	}
+
+	// Set Gin mode
+	if os.Getenv("GIN_MODE") == "release" {
+		gin.SetMode(gin.ReleaseMode)
+	}
+
+	r := gin.Default()
+
+	// CORS configuration
+	r.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"http://localhost:3000", "http://127.0.0.1:3000"},
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"},
+		AllowHeaders:     []string{"Content-Type", "Authorization", "Accept", "Origin", "X-Requested-With"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+		MaxAge:           12 * time.Hour,
+	}))
+
+	// Public routes
+	auth := r.Group("/auth")
+	{
+		auth.POST("/register", handlers.Register)
+		auth.POST("/login", handlers.Login)
+	}
+
+	// Protected API routes
+	api := r.Group("/api")
+	api.Use(middleware.AuthMiddleware())
+	{
+		// User routes
+		api.GET("/user", handlers.GetUserInfo)
+		
+		// Subscription routes
+		routes.RegisterSubscriptionRoutes(api)
+		
+		// Payment history routes
+		api.GET("/payments/history", handlers.GetPaymentHistory)
+	}
+
+	// PayPal Payment Routes (Protected)
+	paypalRoutes := r.Group("/api/payments")
+	paypalRoutes.Use(middleware.AuthMiddleware())
+	{
+		// Import paypal handler
+		paypalHandler := r.Group("/api/payments")
+		paypalHandler.Use(middleware.AuthMiddleware())
+		handlers.RegisterPayPalRoutes(paypalHandler)
+	}
+
+	// Stripe webhook routes (from Stripe Express backend)
+	stripeWebhook := r.Group("/api/payments/stripe")
+	{
+		stripeWebhook.POST("/webhook/success", handlers.HandleStripeWebhookSuccess)
+		stripeWebhook.POST("/webhook/failed", handlers.HandleStripeWebhookFailed)
+		stripeWebhook.POST("/webhook/canceled", handlers.HandleStripeWebhookCanceled)
+		stripeWebhook.POST("/webhook/refunded", handlers.HandleStripeWebhookRefunded)
+	}
+
+	// Admin routes (protected)
+	admin := r.Group("/api/admin")
+	admin.Use(middleware.AuthMiddleware())
+	{
+		admin.GET("/payments", handlers.GetAllPayments)
+		admin.GET("/subscriptions", handlers.GetAllSubscriptions)
+		admin.GET("/stats", handlers.GetAdminStats)
+	}
+	{
+		auth.POST("/register", handlers.Register)
+		auth.POST("/login", handlers.Login)
+		auth.POST("/logout", handlers.Logout)
+		auth.GET("/verify", handlers.VerifyEmail)
+		// Password change (protected)
+		auth.POST("/change-password", middleware.AuthMiddleware(), handlers.ChangePassword)
+	}
+
+	// Payment routes (semua handler langsung ke Gin)
+	payment := r.Group("/api/payments")
+	{
+		payment.POST("/create", handlers.CreatePayment)
+		payment.GET("/verify", handlers.VerifyPayment)
+		payment.POST("/webhook/paypal", handlers.HandlePayPalWebhook)
+		payment.POST("/webhook/litecoin", handlers.HandleLitecoinWebhook)
+	}
+
+	// Subscription routes
+	subscription := r.Group("/api/subscriptions")
+	{
+		subscription.GET("", handlers.GetAllSubscriptions) // Admin endpoint - get all subscriptions
+	}
+
+	// Admin routes
+	admin := r.Group("/api/admin")
+	{
+		admin.GET("/stats", handlers.GetDashboardStats)
+		admin.GET("/payments", handlers.GetAllPayments)
+		admin.GET("/payments/by-status", handlers.GetPaymentsByStatus)
+		admin.GET("/subscriptions/by-plan", handlers.GetSubscriptionsByPlan)
+	}
+
+	// Protected routes
+	protected := r.Group("/api")
+	protected.Use(middleware.AuthMiddleware())
+	{
+		protected.GET("/profile", handlers.Profile)
+		protected.GET("/user/subscription", handlers.GetUserSubscription)
+		protected.POST("/user/upgrade", handlers.UpgradeSubscription)
+		protected.GET("/payments/history", handlers.GetPaymentHistory)
+	}
+
+	// Health check with database status
+	r.GET("/api/plans", handlers.GetPlans)
+	r.GET("/health", func(c *gin.Context) {
+		db, err := database.DB.DB()
+		if err != nil {
+			c.JSON(http.StatusServiceUnavailable, gin.H{
+				"status":  "ERROR",
+				"service": "Auth Backend",
+				"error":   "Database connection failed",
+				"time":    time.Now().Format(time.RFC3339),
+			})
+			return
+		}
+
+		if err := db.Ping(); err != nil {
+			c.JSON(http.StatusServiceUnavailable, gin.H{
+				"status":  "ERROR",
+				"service": "Auth Backend",
+				"error":   "Database ping failed",
+				"time":    time.Now().Format(time.RFC3339),
+			})
+			return
+		}
+
+		c.JSON(http.StatusOK, gin.H{
+			"status":  "OK",
+			"service": "Auth Backend",
+			"time":    time.Now().Format(time.RFC3339),
+		})
+	})
+
+	// Register subscription routes
+	routes.RegisterSubscriptionRoutes(r)
+
+	// 404 handler
+	r.NoRoute(func(c *gin.Context) {
+		c.JSON(404, gin.H{
+			"error":   true,
+			"message": "Endpoint not found",
+			"path":    c.Request.URL.Path,
+		})
+	})
+
+	// Start server with graceful shutdown
+	port := ":8080"
+	srv := &http.Server{
+		Addr:    port,
+		Handler: r,
+	}
+
+	go func() {
+		log.Println("🚀 Server starting on :8080")
+		log.Println("📊 Health check: http://localhost:8080/health")
+		log.Println("🔐 Auth endpoints: http://localhost:8080/auth/*")
+		log.Println("💳 Payment endpoints: http://localhost:8080/api/payments/*")
+
+		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			log.Fatal("Failed to start server:", err)
+		}
+	}()
+
+	// Wait for interrupt signal to gracefully shutdown the server
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
+	<-quit
+	log.Println("Shutting down server...")
+
+	// Give outstanding requests 5 seconds to complete
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	if err := srv.Shutdown(ctx); err != nil {
+		log.Fatal("Server forced to shutdown:", err)
+	}
+
+	// Close database connection
+	if err := database.CloseDB(); err != nil {
+		log.Fatal("Failed to close database:", err)
+	}
+
+	log.Println("Server exited properly")
+}
