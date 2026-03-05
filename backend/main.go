@@ -7,6 +7,8 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
+	"strings"
+	"io"
 	"time"
 
 	"saas2/backend/database"
@@ -20,16 +22,34 @@ import (
 )
 
 func main() {
+	if err := godotenv.Load(); err != nil {
+		log.Println("⚠️  Warning: .env file not found, using system environment variables")
+	} else {
+		log.Println("✅ Successfully loaded .env file")
+	}
 	r := gin.Default()
 	// CORS configuration (must be at the very top, before any routes)
+	allowedOrigins := strings.Split(os.Getenv("ALLOWED_ORIGINS"), ",")
+	if len(allowedOrigins) == 0 || allowedOrigins[0] == "" {
+		allowedOrigins = []string{"http://localhost:3000"}
+	}
 	r.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"http://localhost:3000", "http://127.0.0.1:3000", "https://unhanged-tabatha-drumliest.ngrok-free.dev"},
+		AllowOrigins:     allowedOrigins,
 		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"},
 		AllowHeaders:     []string{"Content-Type", "Authorization", "Accept", "Origin", "X-Requested-With"},
 		ExposeHeaders:    []string{"Content-Length"},
 		AllowCredentials: true,
 		MaxAge:           12 * time.Hour,
 	}))
+		// Logging ke file
+		logFile, err := os.OpenFile("server.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+		if err == nil {
+			log.SetOutput(io.MultiWriter(os.Stdout, logFile))
+		} else {
+			log.Println("[WARN] Tidak bisa menulis ke server.log, hanya log ke console")
+		}
+	// API Key Middleware hanya untuk endpoint publik (produk, kategori, transaksi)
+	// Untuk endpoint profile/api-keys, hanya pakai AuthMiddleware
 	// Handle OPTIONS preflight for CORS
 	r.OPTIONS("/*path", func(c *gin.Context) {
 		c.Status(200)
@@ -57,11 +77,7 @@ func main() {
 	api := r.Group("/api")
 	api.GET("/auth/me", handlers.Me)
 	// Load environment variables from .env file
-	if err := godotenv.Load(); err != nil {
-		log.Println("⚠️  Warning: .env file not found, using system environment variables")
-	} else {
-		log.Println("✅ Successfully loaded .env file")
-	}
+	
 
 	log.Println("[DEBUG] Reached before DB init")
 	// Initialize database
@@ -115,6 +131,9 @@ func main() {
 		protected.GET("/profile", handlers.Profile)
 		protected.GET("/user/subscription", handlers.GetUserSubscription)
 		protected.POST("/user/upgrade", handlers.UpgradeSubscription)
+		// API Key routes
+		protected.GET("/profile/api-keys", handlers.GetApiKeys)
+		protected.POST("/profile/api-keys/generate", handlers.GenerateApiKeys)
 		// (removed: protected payments endpoints)
 
 		// Register dashboard stats endpoint for authenticated users
@@ -172,14 +191,20 @@ func main() {
 	}
 
 
-		// Register product routes (public, for POS & Android)
-		routes.RegisterProductRoutes(r)
+		// Register product routes (public, untuk POS & Android) dengan ApiKeyOrAuthMiddleware
+		productGroup := r.Group("/api/products")
+		productGroup.Use(middleware.ApiKeyOrAuthMiddleware())
+		routes.RegisterProductRoutes(productGroup)
 
-		// Register category routes (public, for POS & Android)
-		routes.RegisterCategoryRoutes(r)
+		// Register category routes (public, untuk POS & Android) dengan ApiKeyOrAuthMiddleware
+		categoryGroup := r.Group("/api/categories")
+		categoryGroup.Use(middleware.ApiKeyOrAuthMiddleware())
+		routes.RegisterCategoryRoutes(categoryGroup)
 
-		// Register transaction routes (POS kasir)
-		routes.RegisterTransactionRoutes(r)
+		// Register transaction routes (POS kasir) dengan ApiKeyOrAuthMiddleware
+		transactionGroup := r.Group("/api/transactions")
+		transactionGroup.Use(middleware.ApiKeyOrAuthMiddleware())
+		routes.RegisterTransactionRoutes(transactionGroup)
 
 	   srv := &http.Server{
 		   Addr:    ":" + port,

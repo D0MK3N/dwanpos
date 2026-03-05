@@ -4,6 +4,7 @@ import (
     "fmt"
     "log"
     "os"
+    "strings"
     "time"
 
     "gorm.io/driver/mysql"
@@ -25,8 +26,12 @@ type User struct {
     Subscription  string    `gorm:"default:'free';type:varchar(50)" json:"subscription"`
     IsActive      bool      `gorm:"default:true" json:"is_active"`
     EmailVerified bool      `gorm:"default:false" json:"email_verified"`
+    ApiKeyProduct    string `gorm:"type:varchar(255)" json:"api_key_product"`
+    ApiKeyCategory   string `gorm:"type:varchar(255)" json:"api_key_category"`
+    ApiKeyTransaction string `gorm:"type:varchar(255)" json:"api_key_transaction"`
     CreatedAt     time.Time `json:"created_at"`
     UpdatedAt     time.Time `json:"updated_at"`
+    DeletedAt     *time.Time `gorm:"index" json:"deleted_at"`
 }
 
 // Plan model
@@ -229,7 +234,120 @@ func MigrateDB() error {
     
     // Seed default plans
     seedDefaultPlans()
+
+	if err := seedDefaultCategories(); err != nil {
+		return fmt.Errorf("failed to seed default categories: %w", err)
+	}
+
+    if err := syncProductCategoryNames(); err != nil {
+        return fmt.Errorf("failed to sync product category names: %w", err)
+    }
     
+    return nil
+}
+
+func seedDefaultCategories() error {
+    defaultCategories := []string{"Makanan", "Minuman", "Snack"}
+
+    for _, categoryName := range defaultCategories {
+        normalized := strings.ToLower(strings.TrimSpace(categoryName))
+
+        var existingCategory models.Category
+        err := DB.Where("LOWER(name) = ?", normalized).First(&existingCategory).Error
+        if err == nil {
+            if existingCategory.Name != categoryName {
+                existingCategory.Name = categoryName
+                if saveErr := DB.Save(&existingCategory).Error; saveErr != nil {
+                    return saveErr
+                }
+                log.Printf("✅ Normalized category name: %s", categoryName)
+            }
+            continue
+        }
+
+        if err != gorm.ErrRecordNotFound {
+            return err
+        }
+
+        newCategory := models.Category{
+            ID:   "C" + fmt.Sprintf("%d", time.Now().UnixNano()),
+            Name: categoryName,
+        }
+
+        if createErr := DB.Create(&newCategory).Error; createErr != nil {
+            return createErr
+        }
+
+        log.Printf("✅ Created default category: %s", categoryName)
+    }
+
+    return nil
+}
+
+func syncProductCategoryNames() error {
+    var categories []models.Category
+    if err := DB.Find(&categories).Error; err != nil {
+        return err
+    }
+
+    if len(categories) == 0 {
+        log.Println("ℹ️  Skip product category sync: no categories found")
+        return nil
+    }
+
+    categoryMap := make(map[string]string)
+    for _, category := range categories {
+        normalized := strings.ToLower(strings.TrimSpace(category.Name))
+        if normalized != "" {
+            categoryMap[normalized] = category.Name
+        }
+    }
+
+    var products []Product
+    if err := DB.Find(&products).Error; err != nil {
+        return err
+    }
+
+    if len(products) == 0 {
+        log.Println("ℹ️  Skip product category sync: no products found")
+        return nil
+    }
+
+    tx := DB.Begin()
+    if tx.Error != nil {
+        return tx.Error
+    }
+
+    updatedCount := 0
+    unmatchedCount := 0
+
+    for _, product := range products {
+        normalized := strings.ToLower(strings.TrimSpace(product.CategoryName))
+        canonicalName, exists := categoryMap[normalized]
+        if !exists {
+            unmatchedCount++
+            continue
+        }
+
+        if product.CategoryName == canonicalName {
+            continue
+        }
+
+        if err := tx.Model(&Product{}).
+            Where("id = ?", product.ID).
+            Update("category_name", canonicalName).Error; err != nil {
+            tx.Rollback()
+            return err
+        }
+
+        updatedCount++
+    }
+
+    if err := tx.Commit().Error; err != nil {
+        return err
+    }
+
+    log.Printf("✅ Product category sync completed: updated=%d unmatched=%d", updatedCount, unmatchedCount)
     return nil
 }
 

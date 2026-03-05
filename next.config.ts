@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    skipTrailingSlashRedirect: true,
     async rewrites() {
       return [
         {
@@ -22,10 +23,7 @@ const nextConfig = {
     ],
   },
   typescript: {
-    ignoreBuildErrors: true,
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
+    ignoreBuildErrors: false,
   },
   allowedDevOrigins: [
     "https://unhanged-tabatha-drumliest.ngrok-free.dev"

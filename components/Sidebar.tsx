@@ -13,9 +13,10 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
-export default function Sidebar({ userProfile, userPlan }: { userProfile?: UserProfile | null, userPlan?: string }) {
+export default function Sidebar({ userProfile, userPlan, sidebarOpen, setSidebarOpen }: { userProfile?: UserProfile | null, userPlan?: string, sidebarOpen?: boolean, setSidebarOpen?: (open: boolean) => void }) {
   const pathname = usePathname();
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  // Use controlled sidebarOpen for mobile
+  const isOpen = typeof sidebarOpen === 'boolean' ? sidebarOpen : true;
 
   const menuSections = [
     {
@@ -37,6 +38,7 @@ export default function Sidebar({ userProfile, userPlan }: { userProfile?: UserP
       items: [
         { href: '/payments', label: 'Payments', icon: '💳' },
         { href: '/profile', label: 'Profile', icon: '👤' },
+        { href: '/api-docs', label: 'API Documentation', icon: '📚' },
       ],
     },
   ];
@@ -45,10 +47,25 @@ export default function Sidebar({ userProfile, userPlan }: { userProfile?: UserP
     <>
       {/* Profile Info */}
       <aside
-        className={`fixed left-0 top-0 h-screen bg-gradient-to-b from-blue-600 via-blue-500 to-cyan-500 dark:from-neutral-900 dark:via-neutral-900 dark:to-neutral-800 border-r border-white/20 dark:border-neutral-800 transition-transform ${
-          sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
-        } w-64 lg:w-64 z-40 shadow-2xl`}
+        className={`fixed left-0 top-0 h-screen bg-gradient-to-b from-blue-600 via-blue-500 to-cyan-500 dark:from-neutral-900 dark:via-neutral-900 dark:to-neutral-800 border-r border-white/20 dark:border-neutral-800 transition-transform w-64 lg:w-64 z-40 shadow-2xl lg:block ${
+          isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+        }`}
       >
+                {/* Close button for mobile sidebar */}
+        {/* Close button for mobile sidebar */}
+        {typeof sidebarOpen === 'boolean' && setSidebarOpen && (
+          <div className="lg:hidden absolute top-4 right-4">
+            <button
+              className="p-2 rounded-full bg-blue-600 text-white shadow-lg focus:outline-none"
+              onClick={() => setSidebarOpen(false)}
+            >
+              <span className="sr-only">Close sidebar</span>
+              <svg width="28" height="28" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        )}
         <div className="p-6 border-b border-white/20 dark:border-neutral-800 flex flex-col items-center gap-3">
           <h1 className="text-2xl font-extrabold bg-gradient-to-r from-white to-cyan-200 bg-clip-text text-transparent tracking-wide drop-shadow-lg">
             DwanPOS
@@ -79,7 +96,7 @@ export default function Sidebar({ userProfile, userPlan }: { userProfile?: UserP
                           ? 'bg-white/10 text-white shadow-lg ring-2 ring-white/30'
                           : 'text-white/80 hover:bg-white/10 hover:text-white'
                       }`}
-                      onClick={() => setSidebarOpen(false)}
+                      onClick={() => setSidebarOpen && setSidebarOpen(false)}
                     >
                       <span className="text-2xl drop-shadow-lg group-hover:scale-110 transition-transform">{item.icon}</span>
                       <span>{item.label}</span>
@@ -92,7 +109,7 @@ export default function Sidebar({ userProfile, userPlan }: { userProfile?: UserP
         </nav>
       </aside>
       {/* Mobile Overlay */}
-      {sidebarOpen && (
+      {typeof sidebarOpen === 'boolean' && isOpen && setSidebarOpen && (
         <div
           className="fixed inset-0 bg-black/40 backdrop-blur-sm lg:hidden z-30"
           onClick={() => setSidebarOpen(false)}

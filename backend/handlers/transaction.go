@@ -4,13 +4,16 @@ package handlers
 import "log"
 
 import (
+	"fmt"
 	"net/http"
+	"time"
+
 	"github.com/gin-gonic/gin"
+	"github.com/jung-kurt/gofpdf"
+	"gorm.io/gorm"
+	"gorm.io/gorm/clause"
 	"saas2/backend/database"
 	"saas2/backend/models"
-	"time"
-	"fmt"
-	"github.com/jung-kurt/gofpdf"
 )
 
 // Handler untuk generate invoice PDF custom
@@ -89,47 +92,111 @@ func CreateTransaction(c *gin.Context) {
 		return
 	}
 
-	total := 0.0
 	for _, item := range req.Items {
-		total += item.Price * float64(item.Qty)
+		if item.ProductID == "" || item.Qty <= 0 {
+			c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": "Item transaksi tidak valid", "data": nil})
+			return
+		}
 	}
+
+	tx := database.DB.Begin()
+	if tx.Error != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"success": false, "message": "Gagal memulai transaksi database", "data": nil})
+		return
+	}
+
+	trxID := fmt.Sprintf("TRX%d", time.Now().UnixNano())
+	total := 0.0
+	items := make([]models.TransactionItem, 0, len(req.Items))
+
+	for index, reqItem := range req.Items {
+		var product database.Product
+		err := tx.Clauses(clause.Locking{Strength: "UPDATE"}).First(&product, "id = ?", reqItem.ProductID).Error
+		if err != nil {
+			tx.Rollback()
+			if err == gorm.ErrRecordNotFound {
+				c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": fmt.Sprintf("Produk %s tidak ditemukan", reqItem.ProductID), "data": nil})
+				return
+			}
+			c.JSON(http.StatusInternalServerError, gin.H{"success": false, "message": "Gagal mengambil data produk", "data": nil})
+			return
+		}
+
+		if product.Stock < reqItem.Qty {
+			tx.Rollback()
+			c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": fmt.Sprintf("Stok produk %s tidak cukup", product.Name), "data": nil})
+			return
+		}
+
+		result := tx.Model(&database.Product{}).
+			Where("id = ? AND stock >= ?", product.ID, reqItem.Qty).
+			Update("stock", gorm.Expr("stock - ?", reqItem.Qty))
+		if result.Error != nil {
+			tx.Rollback()
+			c.JSON(http.StatusInternalServerError, gin.H{"success": false, "message": "Gagal update stok produk", "data": nil})
+			return
+		}
+		if result.RowsAffected == 0 {
+			tx.Rollback()
+			c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": fmt.Sprintf("Stok produk %s tidak cukup", product.Name), "data": nil})
+			return
+		}
+
+		subtotal := product.Price * float64(reqItem.Qty)
+		total += subtotal
+
+		items = append(items, models.TransactionItem{
+			ID:            fmt.Sprintf("%s_ITEM_%d", trxID, index+1),
+			TransactionID: trxID,
+			ProductID:     product.ID,
+			ProductName:   product.Name,
+			Price:         product.Price,
+			Qty:           reqItem.Qty,
+			Subtotal:      subtotal,
+		})
+	}
+
 	if req.Cash < total {
+		tx.Rollback()
 		c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": "Uang tunai kurang dari total", "data": nil})
 		return
 	}
 
+	now := time.Now()
 	trx := models.Transaction{
-		ID: fmt.Sprintf("TRX%d", time.Now().UnixNano()),
-		UserID: req.UserID,
-		Total: total,
-		Cash: req.Cash,
-		Change: req.Cash - total,
-		Status: "paid",
-		OrderType: req.OrderType,
+		ID:          trxID,
+		UserID:      req.UserID,
+		Total:       total,
+		Cash:        req.Cash,
+		Change:      req.Cash - total,
+		Status:      "paid",
+		OrderType:   req.OrderType,
 		TableNumber: req.TableNumber,
-		OrderNote: req.OrderNote,
-		CreatedAt: time.Now(),
-		UpdatedAt: time.Now(),
+		OrderNote:   req.OrderNote,
+		CreatedAt:   now,
+		UpdatedAt:   now,
 	}
-	var items []models.TransactionItem
-	for _, item := range req.Items {
-		items = append(items, models.TransactionItem{
-			ID: fmt.Sprintf("TI%d", time.Now().UnixNano()),
-			TransactionID: trx.ID,
-			ProductID: item.ProductID,
-			ProductName: item.ProductName,
-			Price: item.Price,
-			Qty: item.Qty,
-			Subtotal: item.Price * float64(item.Qty),
-		})
-	}
-	trx.Items = items
 
-	err := database.DB.Create(&trx).Error
-	if err != nil {
+	if err := tx.Create(&trx).Error; err != nil {
+		tx.Rollback()
 		c.JSON(http.StatusInternalServerError, gin.H{"success": false, "message": "Gagal menyimpan transaksi", "data": nil})
 		return
 	}
+
+	if len(items) > 0 {
+		if err := tx.Create(&items).Error; err != nil {
+			tx.Rollback()
+			c.JSON(http.StatusInternalServerError, gin.H{"success": false, "message": "Gagal menyimpan item transaksi", "data": nil})
+			return
+		}
+	}
+
+	if err := tx.Commit().Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"success": false, "message": "Gagal commit transaksi", "data": nil})
+		return
+	}
+
+	trx.Items = items
 	c.JSON(http.StatusOK, gin.H{"success": true, "message": "Transaksi berhasil disimpan", "data": trx})
 }
 

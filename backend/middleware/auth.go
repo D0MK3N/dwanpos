@@ -59,7 +59,7 @@ func extractUserIDFromToken(tokenString string) string {
 	}
 	jwtSecret := os.Getenv("JWT_SECRET")
 	if jwtSecret == "" {
-		jwtSecret = "sijajdfjiajsidf"
+		return ""
 	}
 	type Claims struct {
 		UserID string `json:"user_id"`

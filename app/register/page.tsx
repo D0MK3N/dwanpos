@@ -123,17 +123,17 @@ export default function RegisterPage() {
   };
 
   const getPasswordStrengthColor = () => {
-    if (passwordStrength === 0) return "bg-gray-500";
-    if (passwordStrength <= 2) return "bg-red-500";
-    if (passwordStrength <= 3) return "bg-yellow-500";
-    return "bg-green-500";
+    if (passwordStrength === 0) return "bg-blue-100";
+    if (passwordStrength <= 2) return "bg-blue-300";
+    if (passwordStrength <= 3) return "bg-blue-400";
+    return "bg-blue-600";
   };
 
   const getPasswordStrengthText = () => {
     if (passwordStrength === 0) return "";
-    if (passwordStrength <= 2) return "Weak";
-    if (passwordStrength <= 3) return "Medium";
-    return "Strong";
+    if (passwordStrength <= 2) return "Kurang Kuat";
+    if (passwordStrength <= 3) return "Cukup";
+    return "Kuat";
   };
 
   return (
@@ -231,12 +231,7 @@ export default function RegisterPage() {
                 <div className="mt-2">
                   <div className="flex justify-between text-xs mb-1">
                     <span className="text-blue-400">Password strength:</span>
-                    <span className={`font-medium ${
-                      passwordStrength <= 2 ? 'text-red-400' : 
-                      passwordStrength <= 3 ? 'text-yellow-400' : 'text-green-400'
-                    }`}>
-                      {getPasswordStrengthText()}
-                    </span>
+                    <span className="font-medium text-blue-700">{getPasswordStrengthText()}</span>
                   </div>
                   <div className="w-full bg-blue-100 rounded-full h-1.5">
                     <div 
@@ -269,21 +264,21 @@ export default function RegisterPage() {
                   placeholder="Confirm your password"
                 />
                 {form.confirmPassword && (
-                  <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
-                    {form.password === form.confirmPassword ? (
-                      <svg className="h-5 w-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                    ) : (
-                      <svg className="h-5 w-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                      </svg>
-                    )}
-                  </div>
-                )}
+                    <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
+                      {form.password === form.confirmPassword ? (
+                        <svg className="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      ) : (
+                        <svg className="h-5 w-5 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      )}
+                    </div>
+                  )}
               </div>
               {form.confirmPassword && form.password !== form.confirmPassword && (
-                <p className="mt-1 text-xs text-red-400">Passwords do not match</p>
+                <p className="mt-1 text-xs text-blue-400">Passwords do not match</p>
               )}
             </div>
           </div>

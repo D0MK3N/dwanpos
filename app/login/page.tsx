@@ -121,14 +121,14 @@ export default function LoginPage() {
 
         {/* Success Message */}
         {showSuccess && (
-          <div className="bg-green-50 border border-green-200 rounded-lg p-3 mb-4 text-green-700 text-sm text-center">
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4 text-blue-700 text-sm text-center">
             Login successful! Redirecting...
           </div>
         )}
 
         {/* Error Message */}
         {error && (
-          <div className="bg-red-50 border border-red-200 rounded-lg p-3 mb-4 text-red-700 text-sm text-center">
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4 text-blue-700 text-sm text-center">
             {error}
           </div>
         )}

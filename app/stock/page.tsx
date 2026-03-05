@@ -20,14 +20,14 @@ export default function StockPage() {
 
   if (authLoading || !user) {
     return (
-      <div className="w-full h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-950 dark:to-purple-900">
+      <div className="w-full h-screen flex items-center justify-center bg-white dark:bg-blue-950">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-950 dark:to-purple-900 flex">
+    <div className="min-h-screen bg-white dark:bg-blue-950 flex">
       <Sidebar />
       <div className="flex flex-col flex-1 min-h-screen">
         <main className="flex-1 flex flex-col items-center justify-center py-8 px-4 md:px-8 lg:ml-64">

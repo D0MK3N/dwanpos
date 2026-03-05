@@ -10,7 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
   // Validasi JWT ke backend (Go)
   try {
-    const resp = await fetch("http://localhost:8080/api/auth/me", {
+    const resp = await fetch("http://localhost:8080/auth/me", {
       headers: { "Cookie": `auth_token=${token}` },
       credentials: "include",
     });

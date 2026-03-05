@@ -1,5 +1,3 @@
-
-
 // =======================
 //  Kategori Produk Page
 // =======================
@@ -20,6 +18,20 @@ type Category = {
   name: string;
   productCount?: number;
 };
+
+type ApiResponse = {
+  success?: boolean;
+  message?: string;
+  data?: {
+    products_count?: number;
+  };
+};
+
+type Notice = {
+  type: 'success' | 'error';
+  message: string;
+};
+
 type CategoryForm = Omit<Category, 'id' | 'productCount'>;
 
 
@@ -29,12 +41,14 @@ type CategoryForm = Omit<Category, 'id' | 'productCount'>;
 export default function CategoriesPage() {
   const router = useRouter();
   const { user, isLoading: authLoading } = useAuth();
+  // Untuk user web yang sudah login, tidak perlu pakai api_key
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState<CategoryForm>({ name: '' });
   const [editId, setEditId] = useState<string | null>(null);
+  const [notice, setNotice] = useState<Notice | null>(null);
 
 
   // =======================
@@ -52,7 +66,6 @@ export default function CategoriesPage() {
     }
   }, [user]);
 
-
   // =======================
   //  Fetch Categories
   // =======================
@@ -60,7 +73,13 @@ export default function CategoriesPage() {
     setLoading(true);
     setError('');
     try {
-      const res = await fetch('/api/categories-with-product-count');
+      // Ambil token dari user context jika ada
+      const { getAuthToken } = await import('@/app/utils/auth');
+      const token = getAuthToken();
+      const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+      if (token) headers['Authorization'] = `Bearer ${token}`;
+      // Gunakan endpoint /api/categories agar hanya ambil kategori
+      const res = await fetch('/api/categories', { headers });
       if (!res.ok) throw new Error('Gagal mengambil data kategori');
       const data = await res.json();
       setCategories(data.data || []);
@@ -80,18 +99,28 @@ export default function CategoriesPage() {
     try {
       const method = editId ? 'PUT' : 'POST';
       const url = editId ? `/api/categories/${editId}` : '/api/categories';
+      // Untuk user web, tidak perlu api_key
       const res = await fetch(url, {
         method,
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify(form),
       });
-      if (!res.ok) throw new Error('Gagal menyimpan kategori');
+      const payload: ApiResponse = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(payload?.message || 'Gagal menyimpan kategori');
+
       setShowForm(false);
       setForm({ name: '' });
       setEditId(null);
+      setNotice({
+        type: 'success',
+        message: editId ? 'Kategori berhasil diupdate' : 'Kategori berhasil ditambahkan',
+      });
       fetchCategories();
-    } catch (e) {
-      alert('Gagal menyimpan kategori');
+    } catch (e: unknown) {
+      const message = e instanceof Error ? e.message : 'Gagal menyimpan kategori';
+      setNotice({ type: 'error', message });
     }
   }
 
@@ -102,11 +131,29 @@ export default function CategoriesPage() {
   async function handleDelete(id: string) {
     if (!confirm('Yakin ingin menghapus kategori ini?')) return;
     try {
-      const res = await fetch(`/api/categories/${id}`, { method: 'DELETE' });
-      if (!res.ok) throw new Error('Gagal menghapus kategori');
+      // Untuk user web, tidak perlu api_key
+      const res = await fetch(`/api/categories/${id}`, {
+        method: 'DELETE',
+      });
+      const payload: ApiResponse = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        if (res.status === 409) {
+          const productsCount = payload?.data?.products_count;
+          const detail = typeof productsCount === 'number'
+            ? ` (${productsCount} produk masih memakai kategori ini)`
+            : '';
+          throw new Error((payload?.message || 'Kategori tidak bisa dihapus') + detail);
+        }
+
+        throw new Error(payload?.message || 'Gagal menghapus kategori');
+      }
+
+      setNotice({ type: 'success', message: 'Kategori berhasil dihapus' });
       fetchCategories();
-    } catch (e) {
-      alert('Gagal menghapus kategori');
+    } catch (e: unknown) {
+      const message = e instanceof Error ? e.message : 'Gagal menghapus kategori';
+      setNotice({ type: 'error', message });
     }
   }
 
@@ -136,7 +183,7 @@ export default function CategoriesPage() {
   //  Render
   // =======================
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-950 dark:to-purple-900 flex">
+    <div className="min-h-screen bg-white dark:bg-blue-950 flex">
       {/* Sidebar */}
       <Sidebar />
       {/* Main Content */}
@@ -149,9 +196,22 @@ export default function CategoriesPage() {
                 <h1 className="text-3xl font-extrabold text-blue-900 dark:text-white mb-1 tracking-tight">Kategori Produk</h1>
                 <p className="text-blue-700 dark:text-blue-200 text-base">Kelola kategori produk untuk toko Anda</p>
               </div>
+              {notice && (
+                <div className={`mb-2 rounded-lg border px-4 py-3 text-sm flex items-start justify-between gap-3 bg-blue-50 border-blue-200 text-blue-800 dark:bg-blue-900/30 dark:border-blue-700 dark:text-blue-100`}>
+                  <span>{notice.message}</span>
+                  <button
+                    type="button"
+                    className="font-bold opacity-80 hover:opacity-100"
+                    onClick={() => setNotice(null)}
+                    aria-label="Tutup notifikasi"
+                  >
+                    ×
+                  </button>
+                </div>
+              )}
               <div className="flex justify-end">
                 <button
-                  className="px-6 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold hover:from-blue-700 hover:to-purple-700 transition text-base shadow border-none"
+                  className="px-6 py-2 rounded-lg bg-blue-600 text-white font-bold hover:bg-blue-700 transition text-base shadow border-none"
                   onClick={() => {
                     setShowForm(true);
                     setForm({ name: '' });
@@ -173,7 +233,7 @@ export default function CategoriesPage() {
                   />
                   <div className="flex gap-4 justify-end">
                     <button type="button" onClick={() => { setShowForm(false); setEditId(null); }} className="px-4 py-2 rounded bg-blue-100 dark:bg-blue-900/30 hover:bg-blue-200 dark:hover:bg-blue-900 text-blue-700 dark:text-blue-200 border-none">Batal</button>
-                    <button type="submit" className="px-4 py-2 rounded bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold hover:from-blue-700 hover:to-purple-700 shadow border-none">
+                    <button type="submit" className="px-4 py-2 rounded bg-blue-600 text-white font-bold hover:bg-blue-700 shadow border-none">
                       {editId ? 'Update' : 'Tambah'} Kategori
                     </button>
                   </div>

@@ -52,7 +52,7 @@ type JWTClaims struct {
 func GenerateJWT(userID, email, name string) (string, error) {
     jwtSecret := os.Getenv("JWT_SECRET")
     if jwtSecret == "" {
-        jwtSecret = "your-secret-key-change-in-production"
+        return "", fmt.Errorf("JWT_SECRET environment variable is required")
     }
 
     claims := JWTClaims{
@@ -80,7 +80,7 @@ func GenerateJWT(userID, email, name string) (string, error) {
 func VerifyJWT(tokenString string) (*JWTClaims, error) {
     jwtSecret := os.Getenv("JWT_SECRET")
     if jwtSecret == "" {
-        jwtSecret = "your-secret-key-change-in-production"
+        return nil, fmt.Errorf("JWT_SECRET environment variable is required")
     }
 
     claims := &JWTClaims{}

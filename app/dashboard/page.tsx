@@ -62,6 +62,8 @@ interface Product {
 }
 
 export default function EnhancedDashboardPage() {
+    // Sidebar open state
+    const [sidebarOpen, setSidebarOpen] = useState(false);
   // Cart handlers
   function addToCart(prod: Product) {
     setCart(prev => {
@@ -177,21 +179,38 @@ export default function EnhancedDashboardPage() {
   const [transactionMsg, setTransactionMsg] = useState('');
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   return (
-    <div className="w-full min-h-screen bg-gradient-to-br from-blue-100 via-purple-50 to-blue-200 dark:from-blue-950 dark:via-purple-900 dark:to-blue-900 flex">
+    <div className="w-full min-h-screen bg-white dark:bg-blue-950 flex">
+      {/* Burger menu for sidebar (mobile) */}
+      <div className="lg:hidden fixed top-4 left-4 z-50">
+        <button
+          className="p-2 rounded-full bg-blue-600 text-white shadow-lg focus:outline-none"
+          onClick={() => setSidebarOpen(true)}
+        >
+          <span className="sr-only">Open sidebar</span>
+          <svg width="28" height="28" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
       {/* Sidebar with profile info */}
-      <Sidebar userProfile={userProfile} userPlan={userPlan} />
+      <Sidebar
+        userProfile={userProfile}
+        userPlan={userPlan}
+        sidebarOpen={sidebarOpen}
+        setSidebarOpen={setSidebarOpen}
+      />
       {/* Main dashboard content */}
       <div className="flex-1 flex flex-col gap-8">
         {/* Header */}
-        <div className="bg-gradient-to-r from-blue-800 via-purple-700 to-blue-600 shadow-2xl rounded-b-3xl pb-10">
+        <div className="bg-blue-700 shadow-2xl rounded-b-3xl pb-10">
           <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 pt-10 flex flex-col gap-4 md:gap-8">
             <h1 className="text-4xl md:text-5xl font-extrabold text-white drop-shadow-lg mb-2 md:mb-3 tracking-tight flex items-center gap-3">
               <span>🛒</span> Kasir POS
             </h1>
-            <p className="text-blue-200 text-base md:text-lg">
+            <p className="text-blue-100 text-base md:text-lg">
               Selamat datang, <span className="font-bold text-white drop-shadow">{userProfile?.name || "User"}</span>
               <br />
-              <span className="text-xs font-semibold">Paket: <span className="uppercase bg-white/30 px-3 py-1 rounded text-white ml-2 tracking-wider shadow">{userPlan}</span></span>
+              <span className="text-xs font-semibold">Paket: <span className="uppercase bg-blue-100 px-3 py-1 rounded text-blue-900 ml-2 tracking-wider shadow">{userPlan}</span></span>
             </p>
           </div>
         </div>
@@ -200,7 +219,7 @@ export default function EnhancedDashboardPage() {
           {/* Left: Produk & Transaksi */}
           <div className="flex-1 flex flex-col gap-8">
             {/* Produk Terbaru */}
-            <div className="bg-white/80 rounded-3xl shadow-lg p-6 md:p-8 border border-blue-100 flex flex-col gap-4">
+            <div className="bg-white rounded-3xl shadow-lg p-6 md:p-8 border border-blue-100 flex flex-col gap-4">
               <h2 className="text-xl md:text-2xl font-bold text-blue-900 mb-2 flex items-center gap-2">🆕 Produk Terbaru</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                 {products.length === 0 ? (
@@ -210,7 +229,7 @@ export default function EnhancedDashboardPage() {
                   </div>
                 ) : (
                   products.slice(-3).reverse().map((prod: Product) => (
-                    <div key={prod.id} className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl shadow-md p-4 flex flex-col gap-1 border-l-4 border-blue-400 hover:shadow-xl transition-all">
+                    <div key={prod.id} className="bg-blue-50 rounded-2xl shadow-md p-4 flex flex-col gap-1 border-l-4 border-blue-400 hover:shadow-xl transition-all">
                       <span className="font-medium text-blue-800 text-base md:text-lg flex items-center gap-2">📦 {prod.name}</span>
                       <span className="text-blue-700 text-base">Rp <HydrationSafeNumber number={prod.price} /></span>
                     </div>
@@ -219,7 +238,7 @@ export default function EnhancedDashboardPage() {
               </div>
             </div>
             {/* Product Management Section */}
-            <div className="bg-white/90 rounded-3xl shadow-xl p-6 md:p-10 border border-blue-200 flex flex-col gap-6 md:gap-8">
+            <div className="bg-white rounded-3xl shadow-xl p-6 md:p-10 border border-blue-200 flex flex-col gap-6 md:gap-8">
               <h2 className="text-2xl font-bold text-blue-900 mb-2 flex items-center gap-2">📋 Daftar Produk</h2>
               <form onSubmit={handleAddProduct} className="flex flex-col md:flex-row gap-4 md:gap-6 mb-2 md:mb-4">
                 <input
@@ -241,7 +260,7 @@ export default function EnhancedDashboardPage() {
                 />
                 <button
                   type="submit"
-                  className="px-6 md:px-10 py-3 md:py-4 rounded-xl bg-gradient-to-r from-blue-700 to-purple-700 text-white font-bold text-base md:text-lg shadow-lg hover:from-blue-800 hover:to-purple-800 transition disabled:opacity-50"
+                  className="px-6 md:px-10 py-3 md:py-4 rounded-xl bg-blue-700 text-white font-bold text-base md:text-lg shadow-lg hover:bg-blue-800 transition disabled:opacity-50"
                   disabled={products.length >= currentLimit || productLoading}
                 >
                   {productLoading ? 'Menyimpan...' : 'Tambah Produk'}
@@ -269,7 +288,7 @@ export default function EnhancedDashboardPage() {
               </ul>
             </div>
             {/* Transaksi Section */}
-            <div className="bg-white/90 rounded-3xl shadow-xl p-6 md:p-10 border border-blue-200 flex flex-col gap-6 md:gap-8">
+            <div className="bg-white rounded-3xl shadow-xl p-6 md:p-10 border border-blue-200 flex flex-col gap-6 md:gap-8">
               <h2 className="text-2xl font-bold text-blue-900 mb-2 flex items-center gap-2">💸 Transaksi Kasir</h2>
               <div className="grid grid-cols-1 gap-6 md:gap-8">
                 {/* Daftar Produk */}
@@ -320,7 +339,7 @@ export default function EnhancedDashboardPage() {
                   <form onSubmit={handleTransaction} className="space-y-4 md:space-y-6">
                     <div className="flex justify-between items-center border-t border-blue-100 pt-4 mt-2">
                       <span className="font-semibold text-blue-900 text-base md:text-lg flex items-center gap-2">💰 Total</span>
-                      <span className="text-2xl md:text-3xl font-bold text-purple-700 bg-purple-50 px-4 py-2 rounded-xl shadow-inner flex items-center gap-2">Rp <HydrationSafeNumber number={total} /></span>
+                      <span className="text-2xl md:text-3xl font-bold text-blue-700 bg-blue-50 px-4 py-2 rounded-xl shadow-inner flex items-center gap-2">Rp <HydrationSafeNumber number={total} /></span>
                     </div>
                     <div>
                       <label className="block text-xs md:text-sm text-blue-900 mb-2">Uang Tunai</label>
@@ -334,7 +353,7 @@ export default function EnhancedDashboardPage() {
                     </div>
                     <button
                       type="submit"
-                      className="w-full py-3 md:py-4 rounded-xl bg-gradient-to-r from-blue-700 to-purple-700 text-white font-bold text-base md:text-lg shadow-lg hover:from-blue-800 hover:to-purple-800 transition"
+                      className="w-full py-3 md:py-4 rounded-xl bg-blue-700 text-white font-bold text-base md:text-lg shadow-lg hover:bg-blue-800 transition"
                       disabled={cart.length === 0 || cash < total}
                     >
                       Proses Transaksi
@@ -401,7 +420,7 @@ export default function EnhancedDashboardPage() {
           {/* Right: Riwayat Transaksi & Aktivitas */}
           <div className="w-full lg:w-[420px] flex flex-col gap-8">
             {/* Riwayat Transaksi Kasir */}
-            <div className="bg-white/90 rounded-3xl shadow-xl p-6 md:p-8 border border-blue-200">
+            <div className="bg-white rounded-3xl shadow-xl p-6 md:p-8 border border-blue-200">
               <h2 className="text-xl md:text-2xl font-bold text-blue-900 mb-4 flex items-center gap-2">📑 Riwayat Transaksi Kasir</h2>
               {historyLoading ? (
                 <div className="text-blue-400">Memuat riwayat transaksi...</div>
@@ -446,7 +465,7 @@ export default function EnhancedDashboardPage() {
                 <h2 className="text-xl md:text-2xl font-bold text-blue-900 mb-4 flex items-center gap-2">🕒 Aktivitas Terbaru</h2>
                 <div className="flex flex-col gap-4">
                   {recentActivity.map((act: RecentActivity, idx: number) => (
-                    <div key={idx} className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl shadow p-4 flex flex-col gap-1 border-l-4 border-blue-400 hover:shadow-lg transition-all">
+                    <div key={idx} className="bg-blue-50 rounded-xl shadow p-4 flex flex-col gap-1 border-l-4 border-blue-400 hover:shadow-lg transition-all">
                       <span className="font-medium text-blue-800 text-base md:text-lg flex items-center gap-2">📝 {act.title}</span>
                       <span className="text-blue-500 text-xs flex items-center gap-1">⏱ <HydrationSafeDate dateString={act.time} /></span>
                     </div>

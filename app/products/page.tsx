@@ -1,4 +1,3 @@
-
 'use client';
 
 
@@ -59,7 +58,11 @@ export default function ProductsPage() {
 
   async function fetchCategories() {
     try {
-      const res = await fetch(`${baseUrl}/api/categories/`);
+      const { getAuthToken } = await import('@/app/utils/auth');
+      const token = getAuthToken();
+      const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+      if (token) headers['Authorization'] = `Bearer ${token}`;
+      const res = await fetch(`${baseUrl}/api/categories`, { headers });
       if (!res.ok) throw new Error('Gagal mengambil data kategori');
       const data = await res.json();
       setCategories(data.data || []);
@@ -70,7 +73,11 @@ export default function ProductsPage() {
     setLoading(true);
     setError('');
     try {
-      const res = await fetch(`${baseUrl}/api/products/`);
+      const { getAuthToken } = await import('@/app/utils/auth');
+      const token = getAuthToken();
+      const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+      if (token) headers['Authorization'] = `Bearer ${token}`;
+      const res = await fetch(`${baseUrl}/api/products`, { headers });
       if (!res.ok) throw new Error('Gagal mengambil data produk');
       const data = await res.json();
       setProducts(data.data || []);
@@ -83,34 +90,46 @@ export default function ProductsPage() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    // Validasi wajib foto
+    if (!form.image_url) {
+      setError('Foto produk wajib diisi');
+      return;
+    }
     try {
       const method = editId ? 'PUT' : 'POST';
       const url = editId
         ? `${baseUrl}/api/products/${editId}`
         : `${baseUrl}/api/products/`;
+      const token = user?.token;
+      const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+      if (token) headers['Authorization'] = `Bearer ${token}`;
       const res = await fetch(url, {
         method,
-        headers: { 'Content-Type': 'application/json' },
+        headers,
         body: JSON.stringify(form),
       });
       if (!res.ok) throw new Error('Gagal menyimpan produk');
       setShowForm(false);
-      setForm({ name: '', category_name: '', price: 0, stock: 0 });
+      setForm({ name: '', category_name: '', price: 0, stock: 0, image_url: '' });
       setEditId(null);
+      setImagePreview('');
       fetchProducts();
     } catch (e) {
-      alert('Gagal menyimpan produk');
+      setError('Gagal menyimpan produk');
     }
   }
 
   async function handleDelete(id: string) {
     if (!confirm('Yakin ingin menghapus produk ini?')) return;
     try {
-      const res = await fetch(`${baseUrl}/api/products/${id}`, { method: 'DELETE' });
+      const token = user?.token;
+      const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+      if (token) headers['Authorization'] = `Bearer ${token}`;
+      const res = await fetch(`/api/products/${id}`, { method: 'DELETE', headers });
       if (!res.ok) throw new Error('Gagal menghapus produk');
       fetchProducts();
     } catch (e) {
-      alert('Gagal menghapus produk');
+      setError('Gagal menghapus produk');
     }
   }
 
@@ -130,6 +149,16 @@ export default function ProductsPage() {
   function handleImageChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
+    // Validasi ekstensi dan ukuran
+    const allowedTypes = ['image/jpeg', 'image/png'];
+    if (!allowedTypes.includes(file.type)) {
+      alert('Foto harus JPG atau PNG');
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      alert('Ukuran foto maksimal 5MB');
+      return;
+    }
     const reader = new FileReader();
     reader.onload = () => {
       setForm(f => ({ ...f, image_url: reader.result as string }));
@@ -154,7 +183,7 @@ export default function ProductsPage() {
   }
 
   return (
-    <div className="flex min-h-screen bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-950 dark:to-purple-900">
+    <div className="flex min-h-screen bg-white dark:bg-blue-950">
       {/* Sidebar */}
       <Sidebar />
       {/* Main content area */}
@@ -190,7 +219,7 @@ export default function ProductsPage() {
               />
             </div>
             <button
-              className="w-full md:w-auto px-6 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold hover:from-blue-700 hover:to-purple-700 transition text-base mt-2 md:mt-0 shadow border-none"
+              className="w-full md:w-auto px-6 py-2 rounded-lg bg-blue-600 text-white font-bold hover:bg-blue-700 transition text-base mt-2 md:mt-0 shadow border-none"
               onClick={() => {
                 setShowForm(true);
                 setForm({ name: '', category_name: categories[0]?.name || '', price: 0, stock: 0 });

@@ -1,3 +1,18 @@
+// Get JWT token from cookie (auth_token) or localStorage
+export function getAuthToken(): string | null {
+  // Try cookie first
+  if (typeof document !== 'undefined') {
+    const match = document.cookie.match(/(?:^|; )auth_token=([^;]*)/);
+    if (match && match[1]) {
+      return decodeURIComponent(match[1]);
+    }
+  }
+  // Fallback to localStorage
+  if (typeof window !== 'undefined') {
+    return localStorage.getItem('token');
+  }
+  return null;
+}
 // utils/auth.ts
 // Helper untuk decode JWT dan cek expired
 

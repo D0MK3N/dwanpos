@@ -4,14 +4,17 @@ package handlers
 import "log"
 
 import (
-	"net/http"
-	"github.com/gin-gonic/gin"
 	"fmt"
-	"saas2/backend/database"
-	"time"
+	"net/http"
+	"os"
 	"path/filepath"
 	"strings"
-	"os"
+	"time"
+
+	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
+	"saas2/backend/database"
+	"saas2/backend/models"
 )
 
 type Product struct {
@@ -33,6 +36,24 @@ type ProductWithCategory struct {
 	ImageURL   string  `json:"image_url"`
 }
 
+func resolveCategoryName(categoryName string) (string, error) {
+	trimmed := strings.TrimSpace(categoryName)
+	if trimmed == "" {
+		return "", fmt.Errorf("kategori wajib diisi")
+	}
+
+	var category models.Category
+	err := database.DB.Where("name = ?", trimmed).First(&category).Error
+	if err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return "", fmt.Errorf("kategori tidak ditemukan")
+		}
+		return "", err
+	}
+
+	return category.Name, nil
+}
+
 // Tambah produk
 func CreateProduct(c *gin.Context) {
 		log.Printf("[%s] [INFO] %s %s", time.Now().Format("2006-01-02 15:04:05"), c.Request.Method, c.FullPath())
@@ -41,11 +62,29 @@ func CreateProduct(c *gin.Context) {
 		   c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": "Invalid data", "data": nil})
 		   return
 	   }
+	resolvedCategoryName, err := resolveCategoryName(p.CategoryName)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": err.Error(), "data": nil})
+		return
+	}
+
+	p.CategoryName = resolvedCategoryName
 	p.ID = "P" + fmt.Sprintf("%d", time.Now().UnixNano())
 	p.CreatedAt = time.Now()
 	p.UpdatedAt = time.Now()
+	// Validasi wajib foto, hanya JPG/PNG, maksimal 5MB
 	if p.ImageURL == "" {
-		p.ImageURL = "https://via.placeholder.com/100x100?text=Produk"
+		c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": "Foto produk wajib diisi", "data": nil})
+		return
+	}
+	if !(strings.HasPrefix(p.ImageURL, "data:image/jpeg") || strings.HasPrefix(p.ImageURL, "data:image/png")) {
+		c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": "Foto harus JPG atau PNG", "data": nil})
+		return
+	}
+	// Estimasi size base64
+	if len(p.ImageURL) > 7*1024*1024 { // base64 lebih besar dari file asli, 5MB file ~7MB base64
+		c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": "Ukuran foto maksimal 5MB", "data": nil})
+		return
 	}
 	   if err := database.DB.Create(&p).Error; err != nil {
 		   c.JSON(http.StatusInternalServerError, gin.H{"success": false, "message": "Gagal menyimpan produk", "data": nil})
@@ -68,6 +107,14 @@ func UpdateProduct(c *gin.Context) {
 		   c.JSON(http.StatusNotFound, gin.H{"success": false, "message": "Produk tidak ditemukan", "data": nil})
 		   return
 	   }
+
+	resolvedCategoryName, err := resolveCategoryName(p.CategoryName)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"success": false, "message": err.Error(), "data": nil})
+		return
+	}
+
+	p.CategoryName = resolvedCategoryName
 	p.ID = id
 	p.CreatedAt = existing.CreatedAt
 	p.UpdatedAt = time.Now()
