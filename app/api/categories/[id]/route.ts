@@ -1,9 +1,10 @@
 import type { NextRequest } from 'next/server';
 
-export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(request: NextRequest, context: { params: Promise<{ id: string }> }) {
+  const { id } = await context.params;
   const backendUrl = process.env.NEXT_PUBLIC_GO_BACKEND_URL || 'http://localhost:8080';
-  const body = await req.json();
-  const res = await fetch(`${backendUrl}/api/categories/${params.id}`, {
+  const body = await request.json();
+  const res = await fetch(`${backendUrl}/api/categories/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -14,9 +15,10 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
   return Response.json(data, { status: res.status });
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(request: NextRequest, context: { params: Promise<{ id: string }> }) {
+  const { id } = await context.params;
   const backendUrl = process.env.NEXT_PUBLIC_GO_BACKEND_URL || 'http://localhost:8080';
-  const res = await fetch(`${backendUrl}/api/categories/${params.id}`, {
+  const res = await fetch(`${backendUrl}/api/categories/${id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',

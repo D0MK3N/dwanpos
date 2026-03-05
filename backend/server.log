@@ -950,3 +950,174 @@
 2026/03/04 20:58:44 [2026-03-04 20:58:44] [INFO] GET /api/auth/me
 2026/03/04 20:58:56 [AUTH] Path: /api/products/upload-image, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3MjY4MDA2NCwiaWF0IjoxNzcyNTkzNjY0fQ.DP_Mrtjdr1oCOaDmzpjXV3fnthFi0yfWQJrYndVzAeU, X-API-Key: 039b14191d3d82653fc199f903a17d228c06c671f719b2bf626d2032d190b299
 2026/03/04 20:58:56 [2026-03-04 20:58:56] [INFO] POST /api/products/upload-image
+2026/03/04 20:59:05 [AUTH] Path: /api/products/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3MjY4MDA2NCwiaWF0IjoxNzcyNTkzNjY0fQ.DP_Mrtjdr1oCOaDmzpjXV3fnthFi0yfWQJrYndVzAeU, X-API-Key: 
+2026/03/04 20:59:05 [2026-03-04 20:59:05] [INFO] POST /api/products/
+2026/03/04 20:59:44 [2026-03-04 20:59:44] [INFO] GET /api/auth/me
+2026/03/04 21:01:02 [2026-03-04 21:01:02] [INFO] GET /api/auth/me
+2026/03/04 21:01:56 [2026-03-04 21:01:56] [INFO] GET /api/auth/me
+2026/03/04 21:02:26 [AUTH] Path: /api/products/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3MjY4MDA2NCwiaWF0IjoxNzcyNTkzNjY0fQ.DP_Mrtjdr1oCOaDmzpjXV3fnthFi0yfWQJrYndVzAeU, X-API-Key: 
+2026/03/04 21:02:26 [2026-03-04 21:02:26] [INFO] GET /api/products/
+2026/03/04 21:02:26 [AUTH] Path: /api/products/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3MjY4MDA2NCwiaWF0IjoxNzcyNTkzNjY0fQ.DP_Mrtjdr1oCOaDmzpjXV3fnthFi0yfWQJrYndVzAeU, X-API-Key: 
+2026/03/04 21:02:26 [2026-03-04 21:02:26] [INFO] GET /api/products/
+2026/03/04 21:02:26 [AUTH] Path: /api/categories/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3MjY4MDA2NCwiaWF0IjoxNzcyNTkzNjY0fQ.DP_Mrtjdr1oCOaDmzpjXV3fnthFi0yfWQJrYndVzAeU, X-API-Key: 
+2026/03/04 21:02:26 [2026-03-04 21:02:26] [INFO] GET /api/categories/
+2026/03/04 21:02:28 [AUTH] Path: /api/products/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3MjY4MDA2NCwiaWF0IjoxNzcyNTkzNjY0fQ.DP_Mrtjdr1oCOaDmzpjXV3fnthFi0yfWQJrYndVzAeU, X-API-Key: 
+2026/03/04 21:02:28 [2026-03-04 21:02:28] [INFO] GET /api/products/
+2026/03/04 21:02:29 [AUTH] Path: /api/products/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3MjY4MDA2NCwiaWF0IjoxNzcyNTkzNjY0fQ.DP_Mrtjdr1oCOaDmzpjXV3fnthFi0yfWQJrYndVzAeU, X-API-Key: 
+2026/03/04 21:02:29 [2026-03-04 21:02:29] [INFO] GET /api/products/
+2026/03/04 21:02:35 [AUTH] Path: /api/products/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3MjY4MDA2NCwiaWF0IjoxNzcyNTkzNjY0fQ.DP_Mrtjdr1oCOaDmzpjXV3fnthFi0yfWQJrYndVzAeU, X-API-Key: 
+2026/03/04 21:02:35 [2026-03-04 21:02:35] [INFO] GET /api/products/
+2026/03/04 21:02:36 [AUTH] Path: /api/products/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3MjY4MDA2NCwiaWF0IjoxNzcyNTkzNjY0fQ.DP_Mrtjdr1oCOaDmzpjXV3fnthFi0yfWQJrYndVzAeU, X-API-Key: 
+2026/03/04 21:02:36 [2026-03-04 21:02:36] [INFO] GET /api/products/
+2026/03/04 21:03:26 [AUTH] Path: /api/products/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3MjY4MDA2NCwiaWF0IjoxNzcyNTkzNjY0fQ.DP_Mrtjdr1oCOaDmzpjXV3fnthFi0yfWQJrYndVzAeU, X-API-Key: 
+2026/03/04 21:03:26 [2026-03-04 21:03:26] [INFO] GET /api/products/
+2026/03/04 21:03:26 [AUTH] Path: /api/products/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3MjY4MDA2NCwiaWF0IjoxNzcyNTkzNjY0fQ.DP_Mrtjdr1oCOaDmzpjXV3fnthFi0yfWQJrYndVzAeU, X-API-Key: 
+2026/03/04 21:03:26 [2026-03-04 21:03:26] [INFO] GET /api/products/
+2026/03/04 21:03:30 [2026-03-04 21:03:30] [INFO] GET /api/auth/me
+2026/03/04 21:03:38 [AUTH] Path: /api/categories/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3MjY4MDA2NCwiaWF0IjoxNzcyNTkzNjY0fQ.DP_Mrtjdr1oCOaDmzpjXV3fnthFi0yfWQJrYndVzAeU, X-API-Key: 
+2026/03/04 21:03:38 [2026-03-04 21:03:38] [INFO] GET /api/categories/
+2026/03/04 21:03:59 [AUTH] Path: /api/products/upload-image, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3MjY4MDA2NCwiaWF0IjoxNzcyNTkzNjY0fQ.DP_Mrtjdr1oCOaDmzpjXV3fnthFi0yfWQJrYndVzAeU, X-API-Key: 039b14191d3d82653fc199f903a17d228c06c671f719b2bf626d2032d190b299
+2026/03/04 21:03:59 [2026-03-04 21:03:59] [INFO] POST /api/products/upload-image
+2026/03/04 21:04:21 [AUTH] Path: /api/products/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3MjY4MDA2NCwiaWF0IjoxNzcyNTkzNjY0fQ.DP_Mrtjdr1oCOaDmzpjXV3fnthFi0yfWQJrYndVzAeU, X-API-Key: 
+2026/03/04 21:04:21 [2026-03-04 21:04:21] [INFO] POST /api/products/
+2026/03/04 21:05:12 [2026-03-04 21:05:12] [INFO] GET /api/auth/me
+2026/03/04 21:06:44 [2026-03-04 21:06:44] [INFO] GET /api/auth/me
+2026/03/04 21:07:49 [2026-03-04 21:07:49] [INFO] GET /api/auth/me
+2026/03/04 21:10:13 [2026-03-04 21:10:13] [INFO] GET /api/auth/me
+2026/03/04 21:11:38 [2026-03-04 21:11:38] [INFO] GET /api/auth/me
+2026/03/04 21:13:07 [2026-03-04 21:13:07] [INFO] GET /api/auth/me
+2026/03/04 21:14:04 [2026-03-04 21:14:04] [INFO] GET /api/auth/me
+2026/03/04 21:15:26 [2026-03-04 21:15:26] [INFO] GET /api/auth/me
+2026/03/04 21:16:28 [2026-03-04 21:16:28] [INFO] GET /api/auth/me
+2026/03/04 21:18:08 [2026-03-04 21:18:08] [INFO] GET /api/auth/me
+2026/03/04 21:19:46 [2026-03-04 21:19:46] [INFO] GET /api/auth/me
+2026/03/04 21:21:22 [2026-03-04 21:21:22] [INFO] GET /api/auth/me
+2026/03/04 21:22:24 [2026-03-04 21:22:24] [INFO] GET /api/auth/me
+2026/03/04 21:23:54 [2026-03-04 21:23:54] [INFO] GET /api/auth/me
+2026/03/04 21:24:56 [2026-03-04 21:24:56] [INFO] GET /api/auth/me
+2026/03/04 21:26:33 [2026-03-04 21:26:33] [INFO] GET /api/auth/me
+2026/03/04 21:28:11 [2026-03-04 21:28:11] [INFO] GET /api/auth/me
+2026/03/04 21:29:44 [2026-03-04 21:29:44] [INFO] GET /api/auth/me
+2026/03/04 21:31:07 [2026-03-04 21:31:07] [INFO] GET /api/auth/me
+2026/03/04 21:32:06 [2026-03-04 21:32:06] [INFO] GET /api/auth/me
+2026/03/04 21:33:25 [2026-03-04 21:33:25] [INFO] GET /api/auth/me
+2026/03/04 21:34:21 [2026-03-04 21:34:21] [INFO] GET /api/auth/me
+2026/03/04 21:35:39 [2026-03-04 21:35:39] [INFO] GET /api/auth/me
+2026/03/04 21:36:38 [2026-03-04 21:36:38] [INFO] GET /api/auth/me
+2026/03/04 21:37:26 [AUTH] Path: /api/products/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3MjY4MDA2NCwiaWF0IjoxNzcyNTkzNjY0fQ.DP_Mrtjdr1oCOaDmzpjXV3fnthFi0yfWQJrYndVzAeU, X-API-Key: 
+2026/03/04 21:37:26 [2026-03-04 21:37:26] [INFO] GET /api/products/
+2026/03/04 21:37:27 [AUTH] Path: /api/products/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3MjY4MDA2NCwiaWF0IjoxNzcyNTkzNjY0fQ.DP_Mrtjdr1oCOaDmzpjXV3fnthFi0yfWQJrYndVzAeU, X-API-Key: 
+2026/03/04 21:37:27 [2026-03-04 21:37:27] [INFO] GET /api/products/
+2026/03/04 21:37:53 [2026-03-04 21:37:53] [INFO] GET /api/auth/me
+2026/03/04 21:38:59 [2026-03-04 21:38:59] [INFO] GET /api/auth/me
+2026/03/04 21:39:10 [AUTH] Path: /api/products/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3MjY4MDA2NCwiaWF0IjoxNzcyNTkzNjY0fQ.DP_Mrtjdr1oCOaDmzpjXV3fnthFi0yfWQJrYndVzAeU, X-API-Key: 
+2026/03/04 21:39:10 [2026-03-04 21:39:10] [INFO] GET /api/products/
+2026/03/04 21:39:10 [AUTH] Path: /api/products/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3MjY4MDA2NCwiaWF0IjoxNzcyNTkzNjY0fQ.DP_Mrtjdr1oCOaDmzpjXV3fnthFi0yfWQJrYndVzAeU, X-API-Key: 
+2026/03/04 21:39:10 [2026-03-04 21:39:10] [INFO] GET /api/products/
+2026/03/04 21:39:21 [AUTH] Path: /api/products/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3MjY4MDA2NCwiaWF0IjoxNzcyNTkzNjY0fQ.DP_Mrtjdr1oCOaDmzpjXV3fnthFi0yfWQJrYndVzAeU, X-API-Key: 
+2026/03/04 21:39:21 [2026-03-04 21:39:21] [INFO] GET /api/products/
+2026/03/04 21:39:21 [AUTH] Path: /api/products/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3MjY4MDA2NCwiaWF0IjoxNzcyNTkzNjY0fQ.DP_Mrtjdr1oCOaDmzpjXV3fnthFi0yfWQJrYndVzAeU, X-API-Key: 
+2026/03/04 21:39:21 [2026-03-04 21:39:21] [INFO] GET /api/products/
+2026/03/04 21:39:37 [AUTH] Path: /api/products/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3MjY4MDA2NCwiaWF0IjoxNzcyNTkzNjY0fQ.DP_Mrtjdr1oCOaDmzpjXV3fnthFi0yfWQJrYndVzAeU, X-API-Key: 
+2026/03/04 21:39:37 [2026-03-04 21:39:37] [INFO] GET /api/products/
+2026/03/04 21:39:40 [AUTH] Path: /api/categories/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3MjY4MDA2NCwiaWF0IjoxNzcyNTkzNjY0fQ.DP_Mrtjdr1oCOaDmzpjXV3fnthFi0yfWQJrYndVzAeU, X-API-Key: 
+2026/03/04 21:39:40 [2026-03-04 21:39:40] [INFO] GET /api/categories/
+2026/03/04 21:39:59 [AUTH] Path: /api/products/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3MjY4MDA2NCwiaWF0IjoxNzcyNTkzNjY0fQ.DP_Mrtjdr1oCOaDmzpjXV3fnthFi0yfWQJrYndVzAeU, X-API-Key: 
+2026/03/04 21:39:59 [2026-03-04 21:39:59] [INFO] POST /api/products/
+2026/03/04 21:40:07 [2026-03-04 21:40:07] [INFO] GET /api/auth/me
+2026/03/04 21:40:28 [AUTH] Path: /api/categories/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3Mjc2MTU5OSwiaWF0IjoxNzcyNjc1MTk5fQ.hnG63nDjrH1kfyogIzkDP_CGK-Ee7cfyIUfuOrMqAfQ, X-API-Key: 
+2026/03/04 21:40:28 [2026-03-04 21:40:28] [INFO] GET /api/categories/
+2026/03/04 21:40:28 [AUTH] Path: /api/products/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3Mjc2MTU5OSwiaWF0IjoxNzcyNjc1MTk5fQ.hnG63nDjrH1kfyogIzkDP_CGK-Ee7cfyIUfuOrMqAfQ, X-API-Key: 
+2026/03/04 21:40:29 [2026-03-04 21:40:29] [INFO] GET /api/products/
+2026/03/04 21:40:29 [AUTH] Path: /api/categories/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3Mjc2MTU5OSwiaWF0IjoxNzcyNjc1MTk5fQ.hnG63nDjrH1kfyogIzkDP_CGK-Ee7cfyIUfuOrMqAfQ, X-API-Key: 
+2026/03/04 21:40:29 [2026-03-04 21:40:29] [INFO] GET /api/categories/
+2026/03/04 21:40:29 [AUTH] Path: /api/products/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3Mjc2MTU5OSwiaWF0IjoxNzcyNjc1MTk5fQ.hnG63nDjrH1kfyogIzkDP_CGK-Ee7cfyIUfuOrMqAfQ, X-API-Key: 
+2026/03/04 21:40:29 [2026-03-04 21:40:29] [INFO] GET /api/products/
+2026/03/04 21:41:17 [AUTH] Path: /api/categories/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3Mjc2MTU5OSwiaWF0IjoxNzcyNjc1MTk5fQ.hnG63nDjrH1kfyogIzkDP_CGK-Ee7cfyIUfuOrMqAfQ, X-API-Key: 
+2026/03/04 21:41:17 [2026-03-04 21:41:17] [INFO] GET /api/categories/
+2026/03/04 21:41:17 [AUTH] Path: /api/products/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3Mjc2MTU5OSwiaWF0IjoxNzcyNjc1MTk5fQ.hnG63nDjrH1kfyogIzkDP_CGK-Ee7cfyIUfuOrMqAfQ, X-API-Key: 
+2026/03/04 21:41:17 [2026-03-04 21:41:17] [INFO] GET /api/products/
+2026/03/04 21:42:12 [AUTH] Path: /api/categories/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3Mjc2MTU5OSwiaWF0IjoxNzcyNjc1MTk5fQ.hnG63nDjrH1kfyogIzkDP_CGK-Ee7cfyIUfuOrMqAfQ, X-API-Key: 
+2026/03/04 21:42:12 [AUTH] Path: /api/products/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3Mjc2MTU5OSwiaWF0IjoxNzcyNjc1MTk5fQ.hnG63nDjrH1kfyogIzkDP_CGK-Ee7cfyIUfuOrMqAfQ, X-API-Key: 
+2026/03/04 21:42:12 [2026-03-04 21:42:12] [INFO] GET /api/categories/
+2026/03/04 21:42:12 [2026-03-04 21:42:12] [INFO] GET /api/products/
+2026/03/04 21:42:12 [AUTH] Path: /api/categories/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3Mjc2MTU5OSwiaWF0IjoxNzcyNjc1MTk5fQ.hnG63nDjrH1kfyogIzkDP_CGK-Ee7cfyIUfuOrMqAfQ, X-API-Key: 
+2026/03/04 21:42:12 [2026-03-04 21:42:12] [INFO] GET /api/categories/
+2026/03/04 21:42:12 [AUTH] Path: /api/products/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3Mjc2MTU5OSwiaWF0IjoxNzcyNjc1MTk5fQ.hnG63nDjrH1kfyogIzkDP_CGK-Ee7cfyIUfuOrMqAfQ, X-API-Key: 
+2026/03/04 21:42:12 [2026-03-04 21:42:12] [INFO] GET /api/products/
+2026/03/04 21:42:16 [AUTH] Path: /api/categories/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3Mjc2MTU5OSwiaWF0IjoxNzcyNjc1MTk5fQ.hnG63nDjrH1kfyogIzkDP_CGK-Ee7cfyIUfuOrMqAfQ, X-API-Key: 
+2026/03/04 21:42:16 [2026-03-04 21:42:16] [INFO] GET /api/categories/
+2026/03/04 21:42:17 [AUTH] Path: /api/categories/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3Mjc2MTU5OSwiaWF0IjoxNzcyNjc1MTk5fQ.hnG63nDjrH1kfyogIzkDP_CGK-Ee7cfyIUfuOrMqAfQ, X-API-Key: 
+2026/03/04 21:42:17 [2026-03-04 21:42:17] [INFO] GET /api/categories/
+2026/03/04 21:42:18 [AUTH] Path: /api/products/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3Mjc2MTU5OSwiaWF0IjoxNzcyNjc1MTk5fQ.hnG63nDjrH1kfyogIzkDP_CGK-Ee7cfyIUfuOrMqAfQ, X-API-Key: 
+2026/03/04 21:42:18 [2026-03-04 21:42:18] [INFO] GET /api/products/
+2026/03/04 21:42:18 [AUTH] Path: /api/categories/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3Mjc2MTU5OSwiaWF0IjoxNzcyNjc1MTk5fQ.hnG63nDjrH1kfyogIzkDP_CGK-Ee7cfyIUfuOrMqAfQ, X-API-Key: 
+2026/03/04 21:42:18 [2026-03-04 21:42:18] [INFO] GET /api/categories/
+2026/03/04 21:42:19 [AUTH] Path: /api/products/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3Mjc2MTU5OSwiaWF0IjoxNzcyNjc1MTk5fQ.hnG63nDjrH1kfyogIzkDP_CGK-Ee7cfyIUfuOrMqAfQ, X-API-Key: 
+2026/03/04 21:42:19 [2026-03-04 21:42:19] [INFO] GET /api/products/
+2026/03/04 21:42:19 [AUTH] Path: /api/categories/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3Mjc2MTU5OSwiaWF0IjoxNzcyNjc1MTk5fQ.hnG63nDjrH1kfyogIzkDP_CGK-Ee7cfyIUfuOrMqAfQ, X-API-Key: 
+2026/03/04 21:42:19 [2026-03-04 21:42:19] [INFO] GET /api/categories/
+2026/03/04 21:42:36 [AUTH] Path: /api/categories/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3Mjc2MTU5OSwiaWF0IjoxNzcyNjc1MTk5fQ.hnG63nDjrH1kfyogIzkDP_CGK-Ee7cfyIUfuOrMqAfQ, X-API-Key: 
+2026/03/04 21:42:36 [2026-03-04 21:42:36] [INFO] GET /api/categories/
+2026/03/04 21:42:36 [AUTH] Path: /api/categories/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3Mjc2MTU5OSwiaWF0IjoxNzcyNjc1MTk5fQ.hnG63nDjrH1kfyogIzkDP_CGK-Ee7cfyIUfuOrMqAfQ, X-API-Key: 
+2026/03/04 21:42:36 [2026-03-04 21:42:36] [INFO] GET /api/categories/
+2026/03/04 21:43:32 [AUTH] Path: /api/products/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3Mjc2MTU5OSwiaWF0IjoxNzcyNjc1MTk5fQ.hnG63nDjrH1kfyogIzkDP_CGK-Ee7cfyIUfuOrMqAfQ, X-API-Key: 
+2026/03/04 21:43:32 [2026-03-04 21:43:32] [INFO] GET /api/products/
+2026/03/04 21:43:32 [AUTH] Path: /api/categories/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3Mjc2MTU5OSwiaWF0IjoxNzcyNjc1MTk5fQ.hnG63nDjrH1kfyogIzkDP_CGK-Ee7cfyIUfuOrMqAfQ, X-API-Key: 
+2026/03/04 21:43:32 [2026-03-04 21:43:32] [INFO] GET /api/categories/
+2026/03/04 21:43:32 [AUTH] Path: /api/products/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3Mjc2MTU5OSwiaWF0IjoxNzcyNjc1MTk5fQ.hnG63nDjrH1kfyogIzkDP_CGK-Ee7cfyIUfuOrMqAfQ, X-API-Key: 
+2026/03/04 21:43:32 [2026-03-04 21:43:32] [INFO] GET /api/products/
+2026/03/04 21:43:32 [AUTH] Path: /api/categories/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3Mjc2MTU5OSwiaWF0IjoxNzcyNjc1MTk5fQ.hnG63nDjrH1kfyogIzkDP_CGK-Ee7cfyIUfuOrMqAfQ, X-API-Key: 
+2026/03/04 21:43:32 [2026-03-04 21:43:32] [INFO] GET /api/categories/
+2026/03/04 21:43:34 [AUTH] Path: /api/categories/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3Mjc2MTU5OSwiaWF0IjoxNzcyNjc1MTk5fQ.hnG63nDjrH1kfyogIzkDP_CGK-Ee7cfyIUfuOrMqAfQ, X-API-Key: 
+2026/03/04 21:43:34 [2026-03-04 21:43:34] [INFO] GET /api/categories/
+2026/03/04 21:43:34 [AUTH] Path: /api/categories/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3Mjc2MTU5OSwiaWF0IjoxNzcyNjc1MTk5fQ.hnG63nDjrH1kfyogIzkDP_CGK-Ee7cfyIUfuOrMqAfQ, X-API-Key: 
+2026/03/04 21:43:34 [2026-03-04 21:43:34] [INFO] GET /api/categories/
+2026/03/04 21:44:05 [AUTH] Path: /api/categories/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3Mjc2MTU5OSwiaWF0IjoxNzcyNjc1MTk5fQ.hnG63nDjrH1kfyogIzkDP_CGK-Ee7cfyIUfuOrMqAfQ, X-API-Key: 
+2026/03/04 21:44:05 [2026-03-04 21:44:05] [INFO] GET /api/categories/
+2026/03/04 21:44:05 [AUTH] Path: /api/products/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3Mjc2MTU5OSwiaWF0IjoxNzcyNjc1MTk5fQ.hnG63nDjrH1kfyogIzkDP_CGK-Ee7cfyIUfuOrMqAfQ, X-API-Key: 
+2026/03/04 21:44:05 [2026-03-04 21:44:05] [INFO] GET /api/products/
+2026/03/04 21:44:05 [AUTH] Path: /api/categories/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3Mjc2MTU5OSwiaWF0IjoxNzcyNjc1MTk5fQ.hnG63nDjrH1kfyogIzkDP_CGK-Ee7cfyIUfuOrMqAfQ, X-API-Key: 
+2026/03/04 21:44:05 [2026-03-04 21:44:05] [INFO] GET /api/categories/
+2026/03/04 21:44:05 [AUTH] Path: /api/products/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3Mjc2MTU5OSwiaWF0IjoxNzcyNjc1MTk5fQ.hnG63nDjrH1kfyogIzkDP_CGK-Ee7cfyIUfuOrMqAfQ, X-API-Key: 
+2026/03/04 21:44:05 [2026-03-04 21:44:05] [INFO] GET /api/products/
+2026/03/04 21:44:07 [AUTH] Path: /api/categories/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3Mjc2MTU5OSwiaWF0IjoxNzcyNjc1MTk5fQ.hnG63nDjrH1kfyogIzkDP_CGK-Ee7cfyIUfuOrMqAfQ, X-API-Key: 
+2026/03/04 21:44:07 [2026-03-04 21:44:07] [INFO] GET /api/categories/
+2026/03/04 21:44:08 [AUTH] Path: /api/categories/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3Mjc2MTU5OSwiaWF0IjoxNzcyNjc1MTk5fQ.hnG63nDjrH1kfyogIzkDP_CGK-Ee7cfyIUfuOrMqAfQ, X-API-Key: 
+2026/03/04 21:44:08 [2026-03-04 21:44:08] [INFO] GET /api/categories/
+2026/03/04 21:44:10 [AUTH] Path: /api/categories/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3Mjc2MTU5OSwiaWF0IjoxNzcyNjc1MTk5fQ.hnG63nDjrH1kfyogIzkDP_CGK-Ee7cfyIUfuOrMqAfQ, X-API-Key: 
+2026/03/04 21:44:10 [2026-03-04 21:44:10] [INFO] GET /api/categories/
+2026/03/04 21:46:24 [AUTH] Path: /api/products/:id, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3MjY4MDA2NCwiaWF0IjoxNzcyNTkzNjY0fQ.DP_Mrtjdr1oCOaDmzpjXV3fnthFi0yfWQJrYndVzAeU, X-API-Key: 039b14191d3d82653fc199f903a17d228c06c671f719b2bf626d2032d190b299
+2026/03/04 21:46:24 [2026-03-04 21:46:24] [INFO] DELETE /api/products/:id
+2026/03/04 21:46:48 [AUTH] Path: /api/products/, Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNyXzZmZjA3ZDY2YTdlYjcxYjU5ZGRmYmZiOTFlNGEzNzM2IiwiZW1haWwiOiJyb3FpQGdtYWlsLmNvbSIsImV4cCI6MTc3MjY4MDA2NCwiaWF0IjoxNzcyNTkzNjY0fQ.DP_Mrtjdr1oCOaDmzpjXV3fnthFi0yfWQJrYndVzAeU, X-API-Key: 
+2026/03/04 21:46:48 [2026-03-04 21:46:48] [INFO] POST /api/products/
+2026/03/05 01:27:18 Shutting down server...
+2026/03/05 01:27:18 Server exiting
+2026/03/05 01:28:03 [DEBUG] Reached before DB init
+2026/03/05 01:28:03 🔗 MySQL DSN: root@tcp(localhost:3306)/auth_db
+2026/03/05 01:28:03 ✅ MySQL database connected successfully
+2026/03/05 01:28:04 ✅ Database tables migrated successfully
+2026/03/05 01:28:04 ℹ️  Plan already exists: Free
+2026/03/05 01:28:04 ℹ️  Plan already exists: Standard
+2026/03/05 01:28:04 ℹ️  Plan already exists: Premium
+2026/03/05 01:28:04 ✅ Product category sync completed: updated=0 unmatched=0
+2026/03/05 01:28:04 [DEBUG] DB init successful
+2026/03/05 01:28:04 ✅ Database tables migrated successfully
+2026/03/05 01:28:04 ℹ️  Plan already exists: Free
+2026/03/05 01:28:04 ℹ️  Plan already exists: Standard
+2026/03/05 01:28:04 ℹ️  Plan already exists: Premium
+2026/03/05 01:28:04 ✅ Product category sync completed: updated=0 unmatched=0
+2026/03/05 01:28:04 
+[36m[1m┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓[0m
+[35m[1m┃   🚀 DWANPOS SaaS Backend v1.0.0[0m							[35m[1m┃[0m
+[34m┃   🕒 Started: 2026-03-05 01:28:04[0m					[34m┃[0m
+[36m[1m┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┃[0m
+[32m┃ 🌐 Server:     http://localhost:8080[0m					[32m┃[0m
+[32m┃ 🗄️  Database:   [1m✓ Connected[0m[32m						┃[0m
+[33m┃ 🏷️  Env:        debug[0m						[33m┃[0m
+┃                                                      		┃
+[35m┃ 🔗 API:        /api/products, /api/categories, /api/transactions[0m				[35m┃[0m
+┃                                                      		┃
+[32m[1m┃ ✅ Status:     Running[0m[32m						┃[0m
+[36m[1m┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+2026/03/05 01:28:04 Server started on port 8080 with database connected

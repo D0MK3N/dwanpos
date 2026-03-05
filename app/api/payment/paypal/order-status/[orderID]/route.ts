@@ -2,10 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { orderId: string } }
+  context: { params: Promise<{ orderID: string }> }
 ) {
-  const { orderId } = params;
-  console.log('🔍 Checking order status:', orderId);
+  const { orderID } = await context.params;
+  console.log('🔍 Checking order status:', orderID);
 
   try {
     const CLIENT_ID = process.env.PAYPAL_CLIENT_ID;
@@ -15,7 +15,7 @@ export async function GET(
     // Jika credentials tidak ada, gunakan mock
     if (!CLIENT_ID || !CLIENT_SECRET) {
       return NextResponse.json({
-        id: orderId,
+        id: orderID,
         status: 'COMPLETED',
         create_time: new Date().toISOString()
       });
@@ -36,7 +36,7 @@ export async function GET(
 
     // Get order details
     const orderResponse = await fetch(
-      `${BASE_URL}/v2/checkout/orders/${orderId}`,
+      `${BASE_URL}/v2/checkout/orders/${orderID}`,
       {
         headers: {
           'Authorization': `Bearer ${access_token}`,
